@@ -1,0 +1,555 @@
+:root {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+	color: #181d1f;
+	background: #f8f8f8;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	background: #f8f8f8;
+}
+
+#root {
+	min-height: 100vh;
+}
+
+/* Chester Grid Layout */
+.chester-grid-wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	width: 100%;
+}
+
+.chester-header {
+	padding: 12px 24px;
+	background: #f8f8f8;
+	border-bottom: 1px solid #babfc7;
+}
+
+.header-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.chester-header h1 {
+	margin: 0;
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: #181d1f;
+}
+
+.theme-toggle {
+	width: 36px;
+	height: 36px;
+	border: 1px solid #babfc7;
+	border-radius: 8px;
+	background: #fff;
+	cursor: pointer;
+	font-size: 1.1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.15s;
+}
+
+.theme-toggle:hover {
+	background: #e8e8e8;
+	border-color: #2196f3;
+}
+
+.chester-grid {
+	flex: 1;
+	overflow: hidden;
+}
+
+/* ─── Calendar Strip ─────────────────────────────────────────────────────── */
+
+.calendar-strip-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	width: 100%;
+}
+
+.year-buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.year-btn {
+	padding: 4px 10px;
+	border: 1px solid #babfc7;
+	border-radius: 6px;
+	background: #fff;
+	cursor: pointer;
+	font-size: 0.7rem;
+	font-weight: 600;
+	color: #5b636b;
+	transition: all 0.15s;
+	white-space: nowrap;
+}
+
+.year-btn:hover {
+	background: #e8e8e8;
+	border-color: #2196f3;
+	color: #181d1f;
+}
+
+.year-btn-active {
+	background: #2196f3;
+	border-color: #2196f3;
+	color: white;
+}
+
+.year-btn-active:hover {
+	background: #1976d2;
+	border-color: #4f46e5;
+	color: white;
+}
+
+.cal-nav-btn {
+	width: 36px;
+	height: 36px;
+	border: none;
+	border-radius: 50%;
+	background: transparent;
+	cursor: pointer;
+	font-size: 1.5rem;
+	color: #5b636b;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.15s;
+	flex-shrink: 0;
+}
+
+.cal-nav-btn:hover:not(:disabled) {
+	background: #e8e8e8;
+	color: #181d1f;
+}
+
+.cal-nav-btn:disabled {
+	opacity: 0.2;
+	cursor: not-allowed;
+}
+
+.calendar-strip {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	background: #fff;
+	border-radius: 16px;
+	padding: 10px 12px;
+	border: 1px solid #babfc7;
+	flex: 1;
+	overflow-x: auto;
+	scroll-behavior: smooth;
+}
+
+.calendar-strip::-webkit-scrollbar {
+	height: 6px;
+}
+
+.calendar-strip::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 3px;
+}
+
+.calendar-strip::-webkit-scrollbar-thumb {
+	background: #babfc7;
+	border-radius: 3px;
+}
+
+.calendar-strip::-webkit-scrollbar-thumb:hover {
+	background: #5b636b;
+}
+
+.cal-day {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2px;
+	padding: 6px 8px;
+	border: none;
+	border-radius: 12px;
+	background: transparent;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	min-width: 46px;
+	flex-shrink: 0;
+}
+
+.cal-day:hover:not(.cal-day-selected) {
+	background: #e8e8e8;
+}
+
+.cal-day-selected {
+	background: #2196f3;
+	box-shadow: 0 2px 8px rgba(33, 150, 243, 0.4);
+}
+
+.cal-day-label {
+	font-size: 0.6rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	color: #5b636b;
+}
+
+.cal-day-selected .cal-day-label {
+	color: rgba(255, 255, 255, 0.85);
+}
+
+.cal-day-weekend .cal-day-label {
+	color: #d32f2f;
+}
+
+.cal-day-selected.cal-day-weekend .cal-day-label {
+	color: #fca5a5;
+}
+
+.cal-day-num {
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: #181d1f;
+}
+
+.cal-day-past .cal-day-num {
+	color: #babfc7;
+}
+
+.cal-day-selected .cal-day-num {
+	color: white;
+}
+
+.cal-day-month {
+	font-size: 0.55rem;
+	font-weight: 600;
+	color: #5b636b;
+	letter-spacing: 0.03em;
+}
+
+.cal-day-selected .cal-day-month {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.cal-day-past .cal-day-month {
+	color: #babfc7;
+}
+
+.cal-day-year {
+	font-size: 0.5rem;
+	font-weight: 600;
+	color: #68686e;
+	letter-spacing: 0.03em;
+}
+
+.cal-day-selected .cal-day-year {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.cal-day-past .cal-day-year {
+	color: #babfc7;
+}
+
+/* Year divider between date groups */
+.cal-year-divider {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px 10px;
+	flex-shrink: 0;
+	border-left: 2px solid #babfc7;
+	margin: 0 4px;
+}
+
+.cal-year-divider span {
+	font-size: 0.7rem;
+	font-weight: 800;
+	color: #2196f3;
+	letter-spacing: 0.05em;
+	writing-mode: horizontal-tb;
+}
+
+/* ─── Team Filter Buttons ────────────────────────────────────────────────── */
+
+.team-buttons {
+	display: flex;
+	gap: 6px;
+	padding-top: 10px;
+	flex-wrap: wrap;
+}
+
+.team-btn {
+	padding: 5px 12px;
+	border: 1px solid #babfc7;
+	border-radius: 6px;
+	background: #fff;
+	cursor: pointer;
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: #5b636b;
+	transition: all 0.15s;
+	white-space: nowrap;
+}
+
+.team-btn:hover {
+	background: #e8e8e8;
+	border-color: #2196f3;
+	color: #181d1f;
+}
+
+.team-btn-active {
+	background: #2196f3;
+	border-color: #2196f3;
+	color: white;
+}
+
+.team-btn-active:hover {
+	background: #1976d2;
+	border-color: #1976d2;
+	color: white;
+}
+
+/* ─── CA Cell Color Classes ──────────────────────────────────────────────── */
+
+.ca-elite {
+	background-color: #065f46 !important;
+	color: white !important;
+	font-weight: 600;
+}
+
+.ca-world-class {
+	background-color: #059669 !important;
+	color: white !important;
+	font-weight: 600;
+}
+
+.ca-excellent {
+	background-color: #34d399 !important;
+	color: #064e3b !important;
+}
+
+.ca-good {
+	background-color: #a7f3d0 !important;
+	color: #065f46 !important;
+}
+
+.ca-decent {
+	background-color: #fef3c7 !important;
+	color: #92400e !important;
+}
+
+.ca-developing {
+	background-color: #fed7aa !important;
+	color: #9a3412 !important;
+}
+
+.ca-low {
+	background-color: #fecaca !important;
+	color: #991b1b !important;
+}
+
+/* ─── Delta Cell Classes ─────────────────────────────────────────────────── */
+
+.delta-positive {
+	color: #059669 !important;
+	font-weight: 700;
+}
+
+.delta-negative {
+	color: #dc2626 !important;
+	font-weight: 700;
+}
+
+.delta-zero {
+	color: #68686e !important;
+}
+
+.delta-none {
+	color: #babfc7 !important;
+}
+
+/* ─── Row Status Highlights ──────────────────────────────────────────────── */
+
+.row-new {
+	background-color: #ecfdf5 !important;
+	border-left: 3px solid #10b981 !important;
+}
+
+.row-gone {
+	background-color: #fef2f2 !important;
+	border-left: 3px solid #ef4444 !important;
+	opacity: 0.7;
+}
+
+.player-name-cell {
+	font-weight: 600;
+}
+
+/* ─── Cell flash animation ───────────────────────────────────────────────── */
+
+.ag-cell-data-changed {
+	background-color: #bfdbfe !important;
+	transition: background-color 1s ease-out;
+}
+
+.ag-cell-data-changed-animation {
+	transition: background-color 1s ease-out;
+}
+
+/* ─── Dark Mode ──────────────────────────────────────────────────────────── */
+
+.dark {
+	background: #181d1f;
+}
+
+.dark .chester-header {
+	background: #222628;
+	border-bottom-color: #68686e;
+}
+
+.dark .chester-header h1 {
+	color: #fff;
+}
+
+.dark .theme-toggle {
+	background: #2d3133;
+	border-color: #68686e;
+	color: #fff;
+}
+
+.dark .theme-toggle:hover {
+	background: #3d4244;
+	border-color: #2196f3;
+}
+
+.dark .year-btn {
+	background: #2d3133;
+	border-color: #68686e;
+	color: #b4bdc4;
+}
+
+.dark .year-btn:hover {
+	background: #3d4244;
+	border-color: #2196f3;
+	color: #fff;
+}
+
+.dark .year-btn-active {
+	background: #2196f3;
+	border-color: #2196f3;
+	color: white;
+}
+
+.dark .cal-nav-btn {
+	color: #b4bdc4;
+}
+
+.dark .cal-nav-btn:hover:not(:disabled) {
+	background: #3d4244;
+	color: #fff;
+}
+
+.dark .team-btn {
+	background: #2d3133;
+	border-color: #68686e;
+	color: #b4bdc4;
+}
+
+.dark .team-btn:hover {
+	background: #3d4244;
+	border-color: #2196f3;
+	color: #fff;
+}
+
+.dark .team-btn-active {
+	background: #2196f3;
+	border-color: #2196f3;
+	color: white;
+}
+
+.dark .calendar-strip {
+	background: #181d1f;
+	border-color: #68686e;
+}
+
+.dark .calendar-strip::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.dark .calendar-strip::-webkit-scrollbar-thumb {
+	background: #68686e;
+}
+
+.dark .calendar-strip::-webkit-scrollbar-thumb:hover {
+	background: #b4bdc4;
+}
+
+.dark .cal-day:hover:not(.cal-day-selected) {
+	background: #2d3133;
+}
+
+.dark .cal-day-label {
+	color: #b4bdc4;
+}
+
+.dark .cal-day-weekend .cal-day-label {
+	color: #ef5350;
+}
+
+.dark .cal-day-num {
+	color: #fff;
+}
+
+.dark .cal-day-past .cal-day-num {
+	color: #68686e;
+}
+
+.dark .cal-day-month {
+	color: #68686e;
+}
+
+.dark .cal-day-past .cal-day-month {
+	color: #4a4f52;
+}
+
+.dark .cal-day-year {
+	color: #68686e;
+}
+
+.dark .cal-day-past .cal-day-year {
+	color: #4a4f52;
+}
+
+.dark .cal-year-divider {
+	border-left-color: #68686e;
+}
+
+.dark .cal-year-divider span {
+	color: #2196f3;
+}
+
+.dark .row-new {
+	background-color: #1b3a2d !important;
+}
+
+.dark .row-gone {
+	background-color: #3a1b1b !important;
+}
+
+.dark .delta-none {
+	color: #4a4f52 !important;
+}
+
+.dark .ag-cell-data-changed {
+	background-color: #1a3a5c !important;
+}
